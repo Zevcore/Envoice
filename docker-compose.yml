@@ -1,0 +1,45 @@
+version: '3.1'
+
+services:
+  nginx:
+    container_name: envoice_nginx
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+    networks:
+      - envoice
+
+  app:
+    container_name: envoice_app
+    build: 
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes: 
+    - ./:/var/www/app
+    depends_on:
+    - mdb
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - envoice
+
+  mdb:
+    container_name: envoice_mdb
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=passwd
+    ports:
+    - "3306:3306"
+    networks:
+      - envoice
+
+networks:
+  envoice:
