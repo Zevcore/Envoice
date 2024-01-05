@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Auth\Application\Entity;
 
+use App\Core\Domain\Enum\Role;
 use Doctrine\ORM\Mapping as ORM;
 use App\Auth\Domain\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Types\UuidType;
@@ -35,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUserIdentifier(): string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     public function getName(): ?string
@@ -76,10 +78,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+        return $this;
+    }
+
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_USER';
+        $roles[] = Role::ROLE_USER->value;
 
         return array_unique($roles);
     }

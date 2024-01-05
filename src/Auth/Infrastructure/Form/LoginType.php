@@ -2,6 +2,6 @@
 
 namespace App\Auth\Infrastructure\Form;
 
-class LoginForm
+class LoginType
 {
 }
