@@ -5,28 +5,27 @@ namespace App\Auth\Infrastructure\Controller;
 
 use App\Auth\Application\Entity\User;
 use App\Auth\Domain\Repository\UserRepository;
-use App\Auth\Infrastructure\Form\LoginType;
 use App\Auth\Infrastructure\Form\RegisterType;
 use App\Core\Domain\Enum\Role;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-class AuthController extends AbstractController
+class RegisterController extends AbstractController
 {
-    public function login(Request $request): Response
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[Route('/register', 'app_register')]
+    public function index(Request $request, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository): Response
     {
-        $form = $this->createForm(LoginType::class);
+        // @TODO: Dashboard route
+        if($this->getUser()->getRoles() !== null)
+        {
+            return $this->redirectToRoute("app_login");
+        }
 
-        return $this->render('Auth/index.html.twig', [
-           'form' => $form
-        ]);
-    }
-
-    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository): Response
-    {
         $form = $this->createForm(RegisterType::class);
 
         $form->handleRequest($request);

@@ -1,7 +1,3 @@
-app_login:
-    path: /
-    controller: App\Auth\Infrastructure\Controller\AuthController::login
-
-app_register:
-    path: /register
-    controller: App\Auth\Infrastructure\Controller\AuthController::register
+app_auth:
+    resource: '../src/Auth/Infrastructure/Controller/'
+    type: attribute

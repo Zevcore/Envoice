@@ -7,16 +7,20 @@ security:
         app_user_provider:
             entity:
                 class: App\Auth\Application\Entity\User
-                property: id
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            form_login:
-                login_path: app_login
-                check_path: app_login
+            provider: app_user_provider
+            custom_authenticator: App\Auth\Domain\Service\UserAuthenticator
+#            form_login:
+#                login_path: app_login
+#                check_path: app_login
+            logout:
+                path: app_logout
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

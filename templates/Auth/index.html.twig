@@ -9,6 +9,10 @@
 </head>
 <body>
     {{ form_start(form) }}
+        <input type="hidden"
+               name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
     {{ form_end(form) }}
 </body>
 </html>
