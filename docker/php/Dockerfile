@@ -22,6 +22,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY ../../composer.json composer.lock ./
 RUN composer dump-autoload
 RUN composer install --no-scripts --no-autoloader
-RUN npm install
 
 RUN chmod 775 /var/www/app

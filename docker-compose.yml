@@ -32,9 +32,7 @@ services:
     container_name: envoice_mdb
     image: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=MYSQL_ROOT_PASSWORD
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=MYSQL_USER_PASSWORD
+      - MYSQL_ROOT_PASSWORD=root
     ports:
     - "3306:3306"
     networks:
