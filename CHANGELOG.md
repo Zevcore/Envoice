@@ -1,3 +1,7 @@
+# [0.0.6]
+### Added
+- Added async mail queue
+
 # [0.0.5]
 ### Added
 - Added mailcatcher container

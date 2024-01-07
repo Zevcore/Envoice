@@ -9,11 +9,16 @@ RUN apt-get update && apt-get install -y \
     cron \
     nano \
     default-mysql-client \
-    && docker-php-ext-install pdo pdo_mysql
+    librabbitmq-dev \
+    libssh-dev \
+    && docker-php-ext-install pdo pdo_mysql \
+    && pecl install amqp \
+    && docker-php-ext-enable amqp
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY ../../composer.json composer.lock ./
+RUN composer dump-autoload
 RUN composer install --no-scripts --no-autoloader
 
 RUN chmod 775 /var/www/app

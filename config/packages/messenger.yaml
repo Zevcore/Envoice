@@ -1,0 +1,6 @@
+framework:
+    messenger:
+        transports:
+            async_email: '%env(MESSENGER_TRANSPORT_DSN)%/email_dispatch_queue'
+        routing:
+            'App\Mail\Domain\Message\MailMessage': async_email
