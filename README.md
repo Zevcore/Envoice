@@ -15,7 +15,7 @@ company management.
 
 <div align="center">
 
-[![Technologies used](https://skillicons.dev/icons?i=php,symfony,redis,mysql,rabbitmq,js,bootstrap,materialui)](https://skillicons.dev)
+[![Technologies used](https://skillicons.dev/icons?i=php,symfony,redis,mysql,rabbitmq,js,bootstrap)](https://skillicons.dev)
 
 </div>
 

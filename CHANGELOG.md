@@ -1,3 +1,11 @@
+# [0.0.7]
+### Added 
+- Webpack Encore
+- Bootstrap
+
+### Changed
+- Login front
+
 # [0.0.6]
 ### Added
 - Added async mail queue
