@@ -1,0 +1,17 @@
+{% extends('base.html.twig') %}
+
+{% block content %}
+    {{ form_start(form, {'attr': {'class': 'task_field '}}) }}
+        <div class="text-dark">{{ form_label(form.email) }}</div>
+        {{ form_widget(form.email, {'attr': {'class': 'form-control mb-3'}}) }}
+        <div class="text-dark">{{ form_label(form.password) }}</div>
+        {{ form_widget(form.password, {'attr': {'class': 'form-control mb-3'}}) }}
+        {{ form_row(form.submit, {'attr': {'class': 'btn btn-dark mb-3'}}) }}
+        <div class="form-group">
+            <input type="hidden"
+                   name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
