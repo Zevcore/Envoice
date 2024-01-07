@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace App\Auth\Infrastructure\Controller;
 
 use App\Auth\Application\Entity\User;
+use App\Auth\Domain\Enum\Role;
 use App\Auth\Domain\Repository\UserRepository;
 use App\Auth\Infrastructure\Form\RegisterType;
-use App\Core\Domain\Enum\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

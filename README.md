@@ -25,6 +25,21 @@ company management.
 - Open bash and type `docker-compose up --build` 
 - That's all!
 
+## Project dependency
+### Symfony application | `localhost:8080/`
+
+### Mailcatcher | `localhost:1080/`
+
+### RabbitMQ | `localhost:15672/`
+
+**Launching consumers**
+
+`php bin/console messenger:consume queue_name`
+
+eg.
+
+`php bin/console messenger:consume async_email --time-limit=3600`
+
 ## License
 
 Released under [MIT](/LICENSE) by [@Zevcore](https://github.com/Zevcore).
