@@ -1,6 +1,6 @@
 doctrine:
     dbal:
-        url: 'mysql://root:%env(resolve:MYSQL_ROOT_PASSWORD)%@mdb:3306/envoice_mdb?server_version=5.7'
+        url: 'mysql://root:root@mdb:3306/envoice_mdb'
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
         auto_generate_proxy_classes: true

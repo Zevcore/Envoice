@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Auth\Domain\Service;
+namespace App\Auth\Infrastructure\Service;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +23,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
     // @TODO: Dashbaord route
     public const DASHBOARD_ROUTE = 'app_register';
 
-    public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
-    {
-    }
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator) {}
 
     public function authenticate(Request $request): Passport
     {
