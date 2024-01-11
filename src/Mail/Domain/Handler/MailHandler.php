@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Mail\Application\Handler;
+namespace App\Mail\Domain\Handler;
 
 use App\Mail\Domain\Message\MailMessage;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Auth\Infrastructure\Controller;
+namespace App\Auth\UI\Controller;
 
 use App\Auth\Application\Entity\User;
 use App\Auth\Domain\Enum\Role;
-use App\Auth\Domain\Repository\UserRepository;
-use App\Auth\Infrastructure\Form\RegisterType;
+use App\Auth\Infrastructure\Repository\UserRepositoryInterface;
+use App\Auth\UI\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +18,10 @@ class RegisterController extends AbstractController
 {
     #[IsGranted('PUBLIC_ACCESS')]
     #[Route('/register', 'app_register')]
-    public function index(Request $request, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository): Response
+    public function index(Request $request, UserPasswordHasherInterface $passwordHasher, UserRepositoryInterface $userRepository): Response
     {
         // @TODO: Dashboard route
-        if($this->getUser()->getRoles() !== null)
+        if($this->getUser() !== null)
         {
             return $this->redirectToRoute("app_login");
         }
@@ -42,6 +42,9 @@ class RegisterController extends AbstractController
             $password = $passwordHasher->hashPassword($user, $dummyUser['password']);
             $user->setPassword($password);
             $userRepository->save($user);
+
+            // @TODO: Redirect to dashbaord
+            return $this->redirectToRoute("app_login");
         }
 
 

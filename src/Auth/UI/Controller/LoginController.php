@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Auth\Infrastructure\Controller;
+namespace App\Auth\UI\Controller;
 
-use App\Auth\Infrastructure\Form\LoginType;
+use App\Auth\UI\Form\LoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
