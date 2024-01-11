@@ -30,10 +30,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email;
 
     #[ORM\Column(type: 'string')]
-    private string $password;
+    private ?string $password;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $is_active;
 
     #[ORM\Column(type: 'json')]
-    private array $roles = [];
+    private ?array $roles = [];
 
     public function getUserIdentifier(): string
     {
@@ -81,6 +84,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->is_active;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->is_active = $isActive;
         return $this;
     }
 
