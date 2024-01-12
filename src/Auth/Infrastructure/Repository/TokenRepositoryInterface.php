@@ -9,4 +9,5 @@ interface TokenRepositoryInterface
 {
     public function save(Token $token): void;
     public function findByToken(string $token): ?Token;
+    public function remove(Token $token): void;
 }

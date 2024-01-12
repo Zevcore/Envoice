@@ -53,8 +53,7 @@ class AccountVerificationService
 
     private function prepareActivationLink(Token $token, string $path): string
     {
-        $homePath = str_replace('/register', '', $path);
-        return sprintf('%s/activate/%s', $homePath, $token->getToken());
+        return sprintf('%s/token/activate/%s', $path, $token->getToken());
     }
 
     private function prepareToken(User $user): Token
@@ -64,7 +63,7 @@ class AccountVerificationService
             uniqid((string) mt_rand(), true)
         ));
 
-        $validUntil = (new \DateTime('now'))->modify('+ 5 minutes');
+        $validUntil = (new \DateTime('now'))->modify('+ 5 second');
 
         $token = new Token();
         $token

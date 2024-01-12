@@ -27,7 +27,7 @@ class ActivationController extends AbstractController
     /**
      * @throws \Exception
      */
-    #[Route("/activate/{token}", "app_activate")]
+    #[Route("/token/activate/{token}", "app_token_activate")]
     public function activate(Request $request, string $token): Response
     {
         $token = $this->tokenRepository->findByToken($token);
@@ -41,8 +41,13 @@ class ActivationController extends AbstractController
             $this->userRepository->activate($token->getUser());
         }
         else {
-            //@TODO: regenerate token
-            throw new \Exception();
+            $session = $request->getSession();
+            $session->set('token', $token);
+            $session->set('fullname', sprintf('%s %s',
+                $token->getUser()->getName(),
+                $token->getUser()->getSurname()
+            ));
+            return $this->redirectToRoute('app_token_expired');
         }
 
         return $this->redirectToRoute("app_login");

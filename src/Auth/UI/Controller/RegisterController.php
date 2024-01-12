@@ -48,8 +48,9 @@ class RegisterController extends AbstractController
             $password = $passwordHasher->hashPassword($user, $dummyUser['password']);
             $user->setPassword($password);
             $userRepository->save($user);
+            $path = str_replace('/register', '', $request->getUri());
 
-            $accountVerificationService->sendToken($user, $request->getUri());
+            $accountVerificationService->sendToken($user, $path);
 
             // @TODO: Redirect to dashbaord
             return $this->redirectToRoute("app_login");
