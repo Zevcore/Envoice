@@ -1,0 +1,30 @@
+{% extends('base.html.twig') %}
+
+{% set page_title = 'Token Expired' %}
+
+{% block content %}
+
+    <div class="container d-flex flex-column">
+        <h1>Dear {{ full_name }}</h1>
+        <p>We're sorry, but the activation link you have used has expired.</p>
+        <p>
+            Typically, activation links are valid for 5 minutes from the time they are generated.
+            After this period, for security reasons, they become invalid and can no longer be used
+            for account activation
+        </p>
+        <p><strong>What to Do Next?</strong></p>
+        <ul>
+            <li>
+                If you still wish to activate your account or access the service,
+                please request a new activation link. You can do this by clicking link below.
+                <a href="{{ link }}" alt="Resend activation link">Resend Activation Link</a>
+            </li>
+            <li>
+                If you did not request this activation or believe this to be an error,
+                no further action is required on your part.
+            </li>
+        </ul>
+        <p>We apologize for any inconvenience this may have caused, and thank you for your understanding.</p>
+        <p>Should you require any further assistance, please do not hesitate to contact our support team at {{ support_email }}</p>
+    </div>
+{% endblock %}

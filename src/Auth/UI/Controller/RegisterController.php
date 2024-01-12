@@ -6,6 +6,7 @@ namespace App\Auth\UI\Controller;
 use App\Auth\Application\Entity\User;
 use App\Auth\Domain\Enum\Role;
 use App\Auth\Infrastructure\Repository\UserRepositoryInterface;
+use App\Auth\Infrastructure\Service\AccountVerificationService;
 use App\Auth\UI\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,8 +19,12 @@ class RegisterController extends AbstractController
 {
     #[IsGranted('PUBLIC_ACCESS')]
     #[Route('/register', 'app_register')]
-    public function index(Request $request, UserPasswordHasherInterface $passwordHasher, UserRepositoryInterface $userRepository): Response
-    {
+    public function index(
+        Request $request,
+        UserPasswordHasherInterface $passwordHasher,
+        UserRepositoryInterface $userRepository,
+        AccountVerificationService $accountVerificationService
+    ): Response {
         // @TODO: Dashboard route
         if($this->getUser() !== null)
         {
@@ -37,11 +42,15 @@ class RegisterController extends AbstractController
                 ->setName($dummyUser['name'])
                 ->setSurname($dummyUser['surname'])
                 ->setEmail($dummyUser['email'])
+                ->setIsActive(false)
                 ->setRoles([Role::ROLE_USER->value]);
 
             $password = $passwordHasher->hashPassword($user, $dummyUser['password']);
             $user->setPassword($password);
             $userRepository->save($user);
+            $path = str_replace('/register', '', $request->getUri());
+
+            $accountVerificationService->sendToken($user, $path);
 
             // @TODO: Redirect to dashbaord
             return $this->redirectToRoute("app_login");

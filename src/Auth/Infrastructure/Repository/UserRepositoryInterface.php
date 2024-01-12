@@ -8,4 +8,5 @@ use App\Auth\Application\Entity\User;
 interface UserRepositoryInterface
 {
     public function save(User $user): void;
+    public function activate(User $user): void;
 }

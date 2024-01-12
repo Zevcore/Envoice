@@ -1,3 +1,8 @@
+# [0.0.8]
+### Added
+- Activation email
+- Activation token refresh
+
 # [0.0.7]
 ### Added 
 - Webpack Encore

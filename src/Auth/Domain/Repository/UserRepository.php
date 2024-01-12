@@ -6,7 +6,6 @@ namespace App\Auth\Domain\Repository;
 use App\Auth\Application\Entity\User;
 use App\Auth\Infrastructure\Repository\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
@@ -21,5 +20,17 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
         $manager = $this->getEntityManager();
         $manager->persist($user);
         $manager->flush();
+    }
+
+    public function activate(User $user): void
+    {
+        $this->getEntityManager()->createQueryBuilder()
+            ->update(User::class, 'u')
+            ->set('u.is_active', ':newIsActiveStatus')
+            ->where('u.email = :userId')
+            ->setParameter('newIsActiveStatus', true)
+            ->setParameter('userId', $user->getEmail())
+            ->getQuery()
+            ->execute();
     }
 }
