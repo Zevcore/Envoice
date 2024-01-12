@@ -8,6 +8,7 @@ use App\Auth\Application\Entity\User;
 use App\Auth\Infrastructure\Repository\TokenRepositoryInterface;
 use App\Mail\Domain\Message\MailMessage;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Uid\Factory\UlidFactory;
 
 class AccountVerificationService
 {
@@ -32,11 +33,18 @@ class AccountVerificationService
         $token = $this->prepareToken($user);
         $activationLink = $this->prepareActivationLink($token, $path);
 
+        $context = [
+          "fullname" => sprintf("%s %s", $user->getName(), $user->getSurname()),
+          "link" =>  $activationLink
+        ];
+
         $mailMessage = new MailMessage(
-            $activationLink,
+            "Mail/activation.html.twig",
             sprintf("%s | %s", $this->appName, 'Verify your account!'),
             self::SENDER_EMAIL,
-            $user->getEmail()
+            $user->getEmail(),
+            $context,
+            true
         );
 
         $this->bus->dispatch($mailMessage);

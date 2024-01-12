@@ -45,7 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getName(): ?string
     {
-        return $this->email;
+        return $this->name;
     }
 
     public function setName(string $name): self
@@ -56,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getSurname(): ?string
     {
-        return $this->email;
+        return $this->name;
     }
 
     public function setSurname(string $surname): self

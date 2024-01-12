@@ -9,7 +9,9 @@ readonly class MailMessage
         private string $content,
         private string $title,
         private string $sender,
-        private string $recipient
+        private string $recipient,
+        private array $context = [],
+        private bool $isTemplated = false
     ) {
 
     }
@@ -32,5 +34,15 @@ readonly class MailMessage
     public function getRecipient(): string
     {
         return $this->recipient;
+    }
+
+    public function getContext(): array
+    {
+        return $this->context;
+    }
+
+    public function isTemplated(): bool
+    {
+        return $this->isTemplated;
     }
 }
