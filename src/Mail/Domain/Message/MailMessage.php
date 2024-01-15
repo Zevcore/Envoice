@@ -5,6 +5,9 @@ namespace App\Mail\Domain\Message;
 
 readonly class MailMessage
 {
+    /**
+     * @param array<string, string> $context
+     */
     public function __construct(
         private string $content,
         private string $title,
@@ -36,6 +39,9 @@ readonly class MailMessage
         return $this->recipient;
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getContext(): array
     {
         return $this->context;

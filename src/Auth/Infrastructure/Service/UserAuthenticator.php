@@ -33,7 +33,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             new UserBadge($email),
             new PasswordCredentials($request->request->all()['login']['password']),
             [
-                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
+                new CsrfTokenBadge('authenticate', (string) $request->request->get('_csrf_token')),
             ]
         );
     }

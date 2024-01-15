@@ -37,9 +37,11 @@ class TokenRepository extends ServiceEntityRepository implements TokenRepository
             ->getOneOrNullResult();
     }
 
-    public function remove(Token $token): void
+    public function remove(?Token $token): void
     {
-        $this->getEntityManager()->remove($token);
-        $this->getEntityManager()->flush();
+        if($token !== null) {
+            $this->getEntityManager()->remove($token);
+            $this->getEntityManager()->flush();
+        }
     }
 }

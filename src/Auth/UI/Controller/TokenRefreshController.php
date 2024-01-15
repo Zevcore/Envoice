@@ -52,14 +52,17 @@ class TokenRefreshController extends AbstractController
     }
 
     #[Route("/token/refresh/{token}", "app_token_refresh")]
-    public function refresh(Request $request, string $token): Response
+    public function refresh(Request $request, string $draftToken): Response
     {
-        $token = $this->tokenRepository->findByToken($token);
-        $this->tokenRepository->remove($token);
-        $this->accountVerificationService->sendToken(
-            $token->getUser(),
-            $request->getSchemeAndHttpHost() . '/'
-        );
+        /* @var Token $token */
+        $token = $this->tokenRepository->findByToken($draftToken);
+        if($token !== null) {
+            $this->tokenRepository->remove($token);
+            $this->accountVerificationService->sendToken(
+                $token->getUser(),
+                $request->getSchemeAndHttpHost() . '/'
+            );
+        }
 
         return $this->redirectToRoute("app_login");
     }

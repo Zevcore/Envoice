@@ -21,19 +21,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Uuid $id;
 
     #[ORM\Column(type: 'string', length: 30)]
-    private ?string $name;
+    private string $name;
 
     #[ORM\Column(type: 'string', length: 50)]
-    private ?string $surname;
+    private string $surname;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private ?string $email;
+    private string $email;
 
     #[ORM\Column(type: 'string')]
-    private ?string $password;
+    private string $password;
 
     #[ORM\Column(type: 'boolean')]
-    private ?bool $is_active;
+    private bool $is_active;
 
     #[ORM\Column(type: 'json')]
     private ?array $roles = [];
@@ -43,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -54,7 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSurname(): ?string
+    public function getSurname(): string
     {
         return $this->name;
     }
@@ -65,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -76,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -106,6 +106,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array<string> $roles
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
