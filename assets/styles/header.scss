@@ -1,0 +1,155 @@
+
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
+.header {
+  width: 100%;
+  height: 90vh;
+  position: relative;
+
+  .container {
+    margin: 0 5vw;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(-45deg, #1ec3d9, #1a83c9, #39ba1c, #1c9615);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    border-bottom-right-radius: 25%;
+    z-index: -1;
+  }
+
+  .sticky-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #292929;
+    transition: .2s ease all;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    transition: .5s ease all;
+
+    .logo {
+      a {
+        font-size: 2.5rem;
+        color: white;
+        font-weight: bold;
+        letter-spacing: 3px;
+        position: relative;
+        &::after {
+          content: '.';
+          color: #EF476F;
+          font-size: 3rem;
+        }
+      }
+    }
+    .menu {
+      display: flex;
+      flex-direction: row;
+
+      li {
+        margin: 0 10px;
+        padding: 2px 10px;
+        a {
+          font-size: 1.7rem;
+          transition: .1s ease all;
+          color: #F4F9E9;
+        }
+        &:hover {
+          a {
+            color: #EF476F;
+            border-bottom: 1px solid #EF476F;
+          }
+        }
+      }
+    }
+    .auth {
+      margin: 20px 0;
+      a {
+        display: block;
+        margin: 10px 0;
+        border: 3px solid #1ec3d9;
+        border-radius: 10px;
+        width: 100%;
+        height: 100%;
+        color: #1ec3d9;
+        padding: 10px 30px;
+        font-size: 2rem;
+        text-align: center;
+        transition: .2s ease all;
+
+        &:hover {
+          transform: rotate(-2deg);
+        }
+      }
+    }
+  }
+
+  .container {
+    margin: 0 5vw;
+
+    .about {
+      display: flex;
+      flex-direction: column;
+      margin-top: 5vh;
+      h2 {
+        font-size: 4rem;
+        color: white;
+        padding: 20px 0;
+      }
+      p {
+        color: white;
+        font-size: 1.8rem;
+        max-width: 30vw;
+      }
+      .auth {
+        margin: 20px 0;
+        a {
+          background: linear-gradient(-45deg, #1ec3d9, #1a83c9, #39ba1c, #1c9615);
+          background-size: 400% 400%;
+          animation: gradient 15s ease infinite;
+          font-weight: bold;
+          display: block;
+          margin: 10px 0;
+          border: 3px solid white;
+          color: white;
+          padding: 15px 0;
+          font-size: 2rem;
+          border-radius: 10px;
+          max-width: 250px;
+          text-align: center;
+          transition: .2s ease all;
+
+          &:hover {
+            transform: scale(1.05, 1.05);
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

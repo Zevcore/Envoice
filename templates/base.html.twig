@@ -7,12 +7,79 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% if page_title is defined %} {{ page_title }} | {% endif %} {{ app_name }}</title>
     {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
 <body>
+    <header class="header">
+        <nav class="nav">
+            <h1 class="logo"><a href="/">Envoice</a></h1>
+            <ul class="menu">
+                <li><a href="">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+            <p class="auth"><a href="/auth">Get started now!</a></p>
+        </nav>
+        <div class="container">
+            <section class="about">
+                <p>Your key partner in managing your company's finances!</p>
+                <h2>Better Solution For Your Business</h2>
+                <p>Regardless of the size of your business, our tool allows you to create,
+                    send and track invoices easily and efficiently. Thanks to the intuitive interface,
+                    even people with no experience in finance can easily use our application.</p>
+                <section class="auth"><a href="/auth">Get started now!</a></section>
+            </section>
+        </div>
+    </header>
     {% block content %}
+    {% endblock %}
+    <footer class="footer">
+        <section class="links">
+            <ul>
+                <li class="title">Get in touch</li>
+                <li class="address">
+                    8014 Edith Blvd NE, Albuquerque, New York, United States
+                </li>
+                <li class="phone">(505) 792-2430</li>
+                <li class="email">demo@yourdomain.com</li>
+            </ul>
+            <ul>
+                <li class="title">Services</li>
+                <li><a href="/">All Solutions</a></li>
+                <li><a href="/">Digital Marketing</a></li>
+                <li><a href="/">SEO Consultancy</a></li>
+                <li><a href="/">Carrier</a></li>
+            </ul>
+            <ul>
+                <li class="title">Company</li>
+                <li><a href="/">About</a></li>
+                <li><a href="/">Contact</a></li>
+                <li><a href="/">Advertise</a></li>
+                <li><a href="/">Terms of Service</a></li>
+                <li><a href="/">Privacy Policy</a></li>
+            </ul>
+            <ul>
+                <li class="title">Our newsletter</li>
+                <li>Subscribe to our newsletter to get our news & discounts delivered to you.</li>
+                {# @TODO: Newsletter form #}
+            </ul>
+        </section>
+        <section class="copyrights">
+            <a href="/" class="logo">Envoice</a>
+            <p>&copy; 2024, All Rights Reserved</p>
+            <ul>
+                <li><a href="/"><i class="ri-facebook-circle-line"></i></a></li>
+                <li><a href="/"><i class="ri-twitter-line"></i></a></li>
+                <li><a href="/"><i class="ri-instagram-line"></i></a></li>
+            </ul>
+        </section>
+    </footer>
+    <section class="scroller">
+        <i class="ri-arrow-up-circle-line"></i>
+    </section>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </body>
 </html>
