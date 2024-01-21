@@ -56,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getSurname(): ?string
     {
-        return $this->name;
+        return $this->surname;
     }
 
     public function setSurname(string $surname): self

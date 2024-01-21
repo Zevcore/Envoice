@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\Auth\Domain\Repository;
 
+use App\Auth\Application\Entity\Token;
 use App\Auth\Application\Entity\User;
 use App\Auth\Infrastructure\Repository\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
@@ -32,5 +34,19 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
             ->setParameter('userId', $user->getEmail())
             ->getQuery()
             ->execute();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByEmail(string $email): ?User
+    {
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select('u')
+            ->from(User::class, 'u')
+            ->where('u.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

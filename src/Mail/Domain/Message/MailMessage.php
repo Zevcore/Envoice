@@ -12,9 +12,7 @@ readonly class MailMessage
         private string $recipient,
         private array $context = [],
         private bool $isTemplated = false
-    ) {
-
-    }
+    ) { }
 
     public function getContent(): string
     {

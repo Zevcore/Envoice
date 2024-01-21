@@ -2,5 +2,8 @@ framework:
     messenger:
         transports:
             async_email: '%env(MESSENGER_TRANSPORT_DSN)%/email_dispatch_queue'
+            sync: 'sync://'
         routing:
             'App\Mail\Domain\Message\MailMessage': async_email
+            'App\Auth\Domain\Message\CreateUserMessage': sync
+            'App\Auth\Domain\Message\SendActivationTokenMessage': sync
