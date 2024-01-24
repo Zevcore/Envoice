@@ -3,6 +3,11 @@
   margin: 0 auto;
   padding: 80px 0;
 
+  .login,
+  .register {
+    display:flex;
+  }
+
   .wrapper {
     width: 40vw;
     margin-right: 20px;

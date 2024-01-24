@@ -6,9 +6,8 @@ namespace App\Auth\Infrastructure\Service;
 use App\Auth\Application\Entity\Token;
 use App\Auth\Application\Entity\User;
 use App\Auth\Infrastructure\Repository\TokenRepositoryInterface;
-use App\Mail\Domain\Message\MailMessage;
+use App\Shared\Domain\Mail\Message\MailMessage;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Uid\Factory\UlidFactory;
 
 class AccountVerificationService
 {

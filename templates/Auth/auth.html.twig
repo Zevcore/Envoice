@@ -9,55 +9,37 @@
 
 {% block content %}
     <div class="container" id="auth">
-        <div class="login">
-            <div class="wrapper">
-                <strong>Login</strong>
-                <p>
-                    Welcome back! Please enter your login details to access the app's invoice generation,
-                    charting and other features.
-                </p>
-                <button onclick="switchForm()">You don't have an account yet? Register now</button>
+        {% if loginForm is defined %}
+            <div class="login">
+                <div class="wrapper">
+                    <strong>Login</strong>
+                    <p>
+                        Welcome back! Please enter your login details to access the app's invoice generation,
+                        charting and other features.
+                    </p>
+                    <button onclick="switchForm()">You don't have an account yet? Register now</button>
+                </div>
+                {{ form(loginForm) }}
             </div>
-            {{ form(loginForm) }}
-        </div>
+        {% endif %}
 
-        <div class="register">
-            <div class="wrapper">
-                <strong>Register new account</strong>
-                <p>
+        {% if registerForm is defined %}
+            <div class="register">
+                <div class="wrapper">
+                    <strong>Register new account</strong>
+                    <p>
 
-                    Join our community! Get full access to app features like generating invoices,
-                    creating charts and more. Complete the form below to create a new account.
-                </p>
-                <button onclick="switchForm()">Already have an account? Log in</button>
+                        Join our community! Get full access to app features like generating invoices,
+                        creating charts and more. Complete the form below to create a new account.
+                    </p>
+                    <button onclick="switchForm()">Already have an account? Log in</button>
+                </div>
+                {{ form(registerForm) }}
             </div>
-            {{ form(registerForm) }}
-        </div>
+        {% endif %}
     </div>
-
-    <script>
-        const registerForm = document.querySelector('.register');
-        const loginForm = document.querySelector('.login');
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loginForm.style.display = "none";
-            registerForm.style.display = "flex";
-        })
-
-        const switchForm = () => {
-            if(registerForm.style.display === "flex") {
-                registerForm.style.display = "none";
-                loginForm.style.display = "flex";
-            }
-            else {
-                registerForm.style.display = "flex";
-                loginForm.style.display = "none";
-            }
-        }
-    </script>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('change_auth_form') }}
 {% endblock %}

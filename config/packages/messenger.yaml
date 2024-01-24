@@ -4,6 +4,8 @@ framework:
             async_email: '%env(MESSENGER_TRANSPORT_DSN)%/email_dispatch_queue'
             sync: 'sync://'
         routing:
-            'App\Mail\Domain\Message\MailMessage': async_email
+            # Async queues
+            'App\Shared\Domain\Mail\Message\MailMessage': async_email
+            # Sync queues
             'App\Auth\Domain\Message\CreateUserMessage': sync
             'App\Auth\Domain\Message\SendActivationTokenMessage': sync

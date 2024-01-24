@@ -16,28 +16,41 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 class SecurityController extends AbstractController
 {
     public function __construct(
-        private MessageBusInterface $bus
+        private readonly MessageBusInterface $bus,
     ) { }
 
     #[IsGranted('PUBLIC_ACCESS')]
-    #[Route('/auth', 'app_auth')]
-    public function index(Request $request): Response
+    #[Route('/login', 'app_login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        $loginForm = $this->createForm(LoginType::class);
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('Auth/auth.html.twig', [
+            'lastUsername' => $lastUsername,
+            'error' => $error,
+            'loginForm' => $loginForm
+        ]);
+    }
+
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[Route('/register', 'app_register')]
+    public function register(Request $request): Response
     {
         //@TODO: Redirect to dashboard
-
-        $loginForm = $this->createForm(LoginType::class);
         $registerFrom = $this->createForm(RegisterType::class);
 
         $registerFrom->handleRequest($request);
         $this->handleRegisterForm($registerFrom);
 
         return $this->render('Auth/auth.html.twig', [
-            'loginForm' => $loginForm,
             'registerForm' => $registerFrom
         ]);
     }
